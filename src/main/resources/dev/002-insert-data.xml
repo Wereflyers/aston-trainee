@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        logicalFilePath="dev/changelog.xml">
+    <changeSet id="002-insert-data" author="wereflyers" context="dev, test">
+        <insert tableName="users_table">
+            <column name="username" value="admin"/>
+            <column name="password" value="PASSWORD123"/>
+        </insert>
+        <insert tableName="medical_speciality">
+            <column name="name" value="НЕВРОЛОГ"/>
+        </insert>
+        <insert tableName="medical_speciality">
+            <column name="name" value="ОКУЛИСТ"/>
+        </insert>
+        <insert tableName="medical_speciality">
+            <column name="name" value="СТОМАТОЛОГ"/>
+        </insert>
+        <insert tableName="medical_speciality">
+            <column name="name" value="ТЕРАПЕВТ"/>
+        </insert>
+        <insert tableName="office">
+            <column name="office_number" value="101"/>
+        </insert>
+        <insert tableName="office">
+            <column name="office_number" value="102"/>
+        </insert>
+        <insert tableName="office">
+            <column name="office_number" value="103"/>
+        </insert>
+        <insert tableName="office">
+            <column name="office_number" value="201"/>
+        </insert>
+        <insert tableName="office">
+            <column name="office_number" value="202"/>
+        </insert>
+        <insert tableName="office">
+            <column name="office_number" value="203"/>
+        </insert>
+        <insert tableName="doctor">
+            <column name="doctor_name" value="first_name"/>
+            <column name="specialty" value="1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

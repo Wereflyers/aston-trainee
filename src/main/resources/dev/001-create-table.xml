@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        logicalFilePath="dev/changelog.xml">
+        <changeSet id="001-create-table" author="wereflyers" context="dev, test">
+            <createTable tableName="users_table">
+                <column autoIncrement="true" name="id" type="SERIAL">
+                    <constraints primaryKey="true" nullable="false"/>
+                </column>
+                <column name="username" type="VARCHAR(30)">
+                    <constraints nullable="false" unique="true"/>
+                </column>
+                <column name="password" type="VARCHAR(30)">
+                    <constraints nullable="false"/>
+                </column>
+            </createTable>
+            <createTable tableName="medical_speciality">
+                <column autoIncrement="true" name="id" type="SERIAL">
+                    <constraints primaryKey="true" nullable="false"/>
+                </column>
+                <column name="name" type="VARCHAR(30)">
+                    <constraints nullable="false" unique="true"/>
+                </column>
+            </createTable>
+            <createTable tableName="office">
+                <column name="office_number" type="SMALLINT">
+                    <constraints primaryKey="true"/>
+                </column>
+            </createTable>
+            <createTable tableName="doctor">
+                <column autoIncrement="true" name="id" type="SERIAL">
+                    <constraints primaryKey="true" nullable="false"/>
+                </column>
+                <column name="doctor_name" type="VARCHAR(200)">
+                    <constraints nullable="false" unique="true"/>
+                </column>
+                <column name="specialty" type="BIGINT">
+                    <constraints nullable="false" foreignKeyName="medical_speciality_fk" references="medical_speciality(id)"/>
+                </column>
+            </createTable>
+            <createTable tableName="shift">
+                <column autoIncrement="true" name="id" type="SERIAL">
+                    <constraints primaryKey="true" nullable="false"/>
+                </column>
+                <column name="doctor" type="BIGINT">
+                    <constraints nullable="false" foreignKeyName="doctor_fk" references="doctor(id)"/>
+                </column>
+                <column name="date" type="VARCHAR(10)">
+                    <constraints nullable="false"/>
+                </column>
+            </createTable>
+            <createTable tableName="shift_office">
+                <column name="shift" type="BIGINT">
+                    <constraints primaryKey="true" nullable="false" foreignKeyName="shift_fk" references="shift(id)"
+                    deleteCascade="true"/>
+                </column>
+                <column name="office" type="SMALLINT">
+                    <constraints primaryKey="true" nullable="false" foreignKeyName="shift_office_fk" references="office(office_number)"
+                    deleteCascade="true"/>
+                </column>
+            </createTable>
+            <createSequence sequenceName="seq_id"/>
+        </changeSet>
+    <changeSet id="add_sequence" author="wereflyers">
+        <createSequence sequenceName="SEQ_ORDERS" cycle="false" minValue="1" maxValue="9223372036854775807" startValue="1" incrementBy="1"/>
+    </changeSet>
+</databaseChangeLog>
